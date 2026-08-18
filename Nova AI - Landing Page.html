@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nova AI - Intelligent Assistant</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#cabeff",
+                    "outline-variant": "#484555",
+                    "on-secondary-fixed": "#001f25",
+                    "surface": "#051424",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed": "#1c0062",
+                    "on-secondary-fixed-variant": "#004e5a",
+                    "surface-bright": "#2c3a4c",
+                    "inverse-on-surface": "#233143",
+                    "on-background": "#d4e4fa",
+                    "on-primary-fixed-variant": "#4918c8",
+                    "background": "#051424",
+                    "tertiary-container": "#ca8100",
+                    "on-secondary": "#00363e",
+                    "primary-fixed": "#e6deff",
+                    "on-surface-variant": "#c9c4d8",
+                    "surface-container-high": "#1c2b3c",
+                    "surface-container-low": "#0d1c2d",
+                    "on-primary": "#32009a",
+                    "on-surface": "#d4e4fa",
+                    "on-secondary-container": "#00515d",
+                    "on-primary-container": "#2b0088",
+                    "on-tertiary": "#472a00",
+                    "surface-dim": "#051424",
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "secondary-fixed": "#a2eeff",
+                    "on-error": "#690005",
+                    "secondary": "#5de6ff",
+                    "on-tertiary-container": "#3e2400",
+                    "inverse-primary": "#613de0",
+                    "error-container": "#93000a",
+                    "surface-container-highest": "#273647",
+                    "tertiary": "#ffb95f",
+                    "outline": "#938ea1",
+                    "surface-variant": "#273647",
+                    "primary-container": "#947dff",
+                    "primary": "#cabeff",
+                    "tertiary-fixed": "#ffddb8",
+                    "surface-container-lowest": "#010f1f",
+                    "secondary-container": "#00cbe6",
+                    "surface-container": "#122131",
+                    "primary-fixed-dim": "#cabeff",
+                    "on-tertiary-fixed": "#2a1700",
+                    "inverse-surface": "#d4e4fa",
+                    "secondary-fixed-dim": "#2fd9f4",
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "on-error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "base": "8px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Hanken Grotesk"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "label-sm": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "display": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(26, 34, 51, 0.6); /* #1A2233 approx mapped to surface-container */
+            backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-left: 1px solid rgba(255,255,255,0.1);
+            border-right: 1px solid transparent;
+            border-bottom: 1px solid transparent;
+        }
+        .glow-primary {
+            box-shadow: 0 0 24px rgba(202, 190, 255, 0.15);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #cabeff, #5de6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar from JSON -->
+<header class="bg-surface/60 backdrop-blur-xl text-primary font-body-md text-body-md fixed top-0 w-full border-b border-white/10 shadow-2xl shadow-black/50 flex justify-between items-center px-margin-desktop py-4 w-full z-50 transition-transform duration-300">
+<div class="flex items-center gap-3">
+<img alt="Nova AI Logo" class="w-8 h-8 rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcg56PkOirop6Pw6RqZM2XZoDxhJODt-nIFLDPkEGRrtrxhBmAaDnrQpzS0UuNgu1hxBOgSjypj8T4Bz4P9cENswJwbsMF6TVM7JnyeG2p2DdhWd7amP7OO0I5KC4My8JktHWk_SqiSrMXsuzArTn4IjI-SkOcCsWAX-ZCoJYgC0XViiW3cN0wzeCCA68yYAdfzla1fvM-jbrnQ3WLFPvVyI1KXt7Sigiou8mer20nzasur2OrmHyOXA"/>
+<span class="text-headline-lg-mobile font-headline-lg-mobile text-primary tracking-tight">Nova AI</span>
+</div>
+<nav class="hidden md:flex gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#features">Features</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#pricing">Pricing</a>
+</nav>
+<div class="flex items-center">
+<a class="text-primary font-bold hover:text-primary transition-colors duration-200 active:scale-95 transition-transform px-4 py-2 rounded-lg hover:bg-white/5" href="#">Login</a>
+</div>
+</header>
+<main class="pt-24 md:pt-32">
+<!-- Hero Section -->
+<section class="relative min-h-[85vh] flex flex-col justify-center items-center px-margin-mobile md:px-margin-desktop text-center overflow-hidden">
+<!-- Atmospheric Background Glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-container/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+<div class="max-w-4xl mx-auto z-10 space-y-8">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-primary/20 mb-6">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-secondary">Nova 2.0 is now live</span>
+</div>
+<h1 class="font-display text-display tracking-tight text-white leading-tight">
+                    Your Intelligent AI Assistant for <br class="hidden md:block"/>
+<span class="text-gradient">Work, Study, and Creativity</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    Experience the next generation of cognitive computing. Nova AI integrates seamlessly into your workflow to analyze data, draft content, and write code at lightspeed.
+                </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
+<button class="w-full sm:w-auto px-8 py-4 bg-primary text-on-primary font-body-md font-semibold rounded-lg hover:bg-primary-fixed transition-all duration-300 glow-primary active:scale-95 flex items-center justify-center gap-2">
+                        Start for Free
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<button class="w-full sm:w-auto px-8 py-4 bg-transparent border border-secondary text-secondary font-body-md font-semibold rounded-lg hover:bg-secondary/10 transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 glass-panel">
+<span class="material-symbols-outlined text-sm">play_circle</span>
+                        Watch Demo
+                    </button>
+</div>
+</div>
+<!-- Abstract Dashboard Preview -->
+<div class="w-full max-w-5xl mt-20 relative z-10 hidden md:block">
+<div class="relative w-full aspect-[16/9] rounded-xl glass-panel shadow-2xl shadow-black overflow-hidden flex items-center justify-center">
+<img class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen" data-alt="A highly abstract, futuristic glowing digital dashboard interface floating in deep space. Deep blue and vibrant purple hues dominate the scene, with intricate geometric data visualizations and a softly glowing central orb representing an AI core. The aesthetic is modern, minimalist glassmorphism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtIsQra0MQFFMSI9e1fszRqscwGPTHwU459ZwHU12duEoOe5K-CEjHqZmHBF6f05yYf3I1ZVaEyksPsd1HLUEeC7gb94zg55uV8MIZOLCjeAbxcxWsDbvndfRowgodBMNWB-u8gY-indq8BxKIBjP3Y7X-uosjnIkApr-A9wrDOpMQ8wwxl83x8vNmwNgZzxIJQGtSrRJGFfKkqRSVOyms5ERwOU93qnKQiUuZXNtkf0hVym7R7Q3aqQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+</div>
+</section>
+<!-- AI Capabilities (Bento Grid) -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto" id="features">
+<div class="mb-16 text-center">
+<h2 class="font-headline-lg text-headline-lg text-white mb-4">Unmatched Capabilities</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Powered by advanced multimodal models.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[320px]">
+<!-- Writing -->
+<div class="glass-panel rounded-2xl p-8 flex flex-col justify-between md:col-span-2 group hover:border-primary/50 transition-colors duration-500 relative overflow-hidden">
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all"></div>
+<div class="z-10">
+<span class="material-symbols-outlined text-primary text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">edit_document</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-white mb-2">Creative Writing</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">Draft essays, emails, and creative stories with context-aware intelligence that adapts to your unique voice.</p>
+</div>
+</div>
+<!-- Coding -->
+<div class="glass-panel rounded-2xl p-8 flex flex-col justify-between group hover:border-secondary/50 transition-colors duration-500 relative overflow-hidden">
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-secondary/10 rounded-full blur-2xl group-hover:bg-secondary/20 transition-all"></div>
+<div class="z-10">
+<span class="material-symbols-outlined text-secondary text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">code</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-white mb-2">Code Generation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Write, debug, and optimize code in over 40 languages seamlessly.</p>
+</div>
+</div>
+<!-- Analysis -->
+<div class="glass-panel rounded-2xl p-8 flex flex-col justify-between md:col-span-3 group hover:border-tertiary/50 transition-colors duration-500 relative overflow-hidden">
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-32 bg-tertiary/5 blur-[80px] group-hover:bg-tertiary/10 transition-all pointer-events-none"></div>
+<div class="z-10 flex flex-col md:flex-row items-center gap-8">
+<div class="flex-1">
+<span class="material-symbols-outlined text-tertiary text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-white mb-2">Deep Data Analysis</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg">Upload complex datasets and let Nova extract meaningful insights, generate charts, and summarize findings instantly.</p>
+</div>
+<div class="flex-1 w-full h-48 rounded-xl bg-surface-container-high/50 border border-white/5 flex items-center justify-center">
+<span class="font-label-sm text-label-sm text-outline">Interactive Visualization Placeholder</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</body></html>
